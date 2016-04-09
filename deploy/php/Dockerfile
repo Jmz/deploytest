@@ -2,6 +2,10 @@ FROM php:7.0.4-fpm-alpine
 
 RUN apk add --update git
 
+RUN docker-php-ext-install pdo_mysql
+
+COPY php.ini /usr/local/etc/php/
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 RUN git clone -b master --depth=1 https://github.com/Jmz/deploytest.git /var/www/html/application

@@ -15,6 +15,24 @@ $app->get('/', function() use ($redis) {
   return sprintf("Current count: %d", $count);
 });
 
+$app->get('/info', function() {
+    phpinfo();
+});
+
+$app->get('/db', function() {
+    try {
+        $dbh = new PDO('mysql:host=mysql;dbname=test', 'newuser', 'password');
+        foreach($dbh->query('SELECT * from test') as $row) {
+            print_r($row);
+        }
+        $dbh = null;
+        return;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+});
+
 $app->get('/bye', function() {
    return 'Goodbye, world!';
 });

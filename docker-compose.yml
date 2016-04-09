@@ -5,6 +5,10 @@ services:
     build: ./deploy/php
     volumes:
       - /var/www/html:/home
+  mysql:
+    build: ./deploy/mysql
+    volumes:
+      - /var/mysql/data:/var/lib/mysql
   redis:
     build: ./deploy/redis
   nginx:
